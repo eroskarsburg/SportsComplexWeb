@@ -1,7 +1,269 @@
 ﻿@page "/"
+@using System.Collections.Generic
 
-<PageTitle>Home</PageTitle>
+<!-- Hero Section -->
+<section class="position-relative">
+    <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark opacity-50"></div>
+    <div class="position-relative" style="height: 500px;">
+        <img src="https://images.wallpaperscraft.com/image/single/football_field_lawn_gate_115238_2560x1440.jpg" alt="Soccer Stadium" class="w-100 h-100 object-fit-cover" />
+    </div>
+    <div class="container position-absolute top-0 start-0 end-0 bottom-0 d-flex flex-column justify-content-center text-white">
+        <h1 class="display-4 fw-bold mb-3">
+            Complexo Esportivo
+        </h1>
+        <p class="lead mb-4 text-white-50 col-md-8 col-lg-10">
+            Bem-vindo ao Complexo Esportivo [Nome] — o lugar onde a paixão pelo futebol ganha vida!
+            Com infraestrutura moderna, campos de alta qualidade e ambiente acolhedor, nosso complexo foi projetado para atletas de todas as idades e níveis. 
+            Aqui, cada treino e cada partida são oportunidades para evoluir, competir e viver o verdadeiro espírito do esporte. 
+            Venha fazer parte dessa história!
+        </p>
+        <div class="d-flex flex-column flex-sm-row gap-2">
+            <a href="#" class="btn btn-success btn-lg">Shop Now</a>
+            <a href="#" class="btn btn-outline-light btn-lg">View Teams</a>
+        </div>
+    </div>
+</section>
 
-<h1>Hello, world!</h1>
+<!-- Categories Section -->
+<section class="py-5">
+    <div class="container">
+        <div class="row align-items-center mb-4">
+            <div class="col-md-8">
+                <h2 class="display-6 fw-bold">Shop by Category</h2>
+                <p class="text-muted">Find the perfect gear for your soccer passion</p>
+            </div>
+            <div class="col-md-4 text-md-end">
+                <a href="#" class="text-decoration-none d-inline-flex align-items-center">
+                    View all categories
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right ms-1" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z" />
+                    </svg>
+                </a>
+            </div>
+        </div>
+        <div class="row g-4">
+            @foreach (var category in categories)
+            {
+                <div class="col-sm-6 col-lg-3">
+                    <a href="#" class="text-decoration-none">
+                        <div class="card h-100 border-0 overflow-hidden position-relative">
+                            <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark opacity-25 transition-opacity"></div>
+                            <img src="@category.Image" alt="@category.Name" class="card-img h-100 object-fit-cover" style="height: 200px;" />
+                            <div class="card-img-overlay d-flex align-items-center justify-content-center">
+                                <h3 class="text-white fw-bold">@category.Name</h3>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            }
+        </div>
+    </div>
+</section>
 
-Welcome to your new app.
+<!-- Featured Products -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="display-6 fw-bold">Featured Products</h2>
+            <p class="text-muted mx-auto" style="max-width: 700px;">
+                Check out our most popular soccer merchandise and fan favorites
+            </p>
+        </div>
+        <div class="row g-4">
+            @foreach (var product in products)
+            {
+                <div class="col-sm-6 col-lg-3">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="position-relative">
+                            <img src="@product.Image" alt="@product.Name" class="card-img-top" style="height: 200px; object-fit: cover;" />
+                            @if (product.IsNew)
+                            {
+                                <span class="position-absolute top-0 end-0 badge bg-success m-2">New</span>
+                            }
+                        </div>
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <small class="text-muted">@product.Category</small>
+                                <div class="d-flex align-items-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="gold" class="bi bi-star-fill me-1" viewBox="0 0 16 16">
+                                        <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                                    </svg>
+                                    <small class="fw-bold">@product.Rating</small>
+                                </div>
+                            </div>
+                            <h5 class="card-title">@product.Name</h5>
+                            <div class="d-flex justify-content-between align-items-center mt-3">
+                                <span class="fw-bold">$@product.Price.ToString("F2")</span>
+                                <button class="btn btn-sm btn-outline-success">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="text-center mt-5">
+            <a href="#" class="btn btn-success btn-lg">View All Products</a>
+        </div>
+    </div>
+</section>
+
+<!-- Testimonials -->
+<section class="py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="display-6 fw-bold">What Our Customers Say</h2>
+            <p class="text-muted mx-auto" style="max-width: 700px;">
+                Don't just take our word for it - hear from some of our satisfied customers
+            </p>
+        </div>
+        <div class="row g-4">
+            @foreach (var testimonial in testimonials)
+            {
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="card-body p-4">
+                            <div class="mb-3">
+                                @for (int i = 0; i < 5; i++)
+                                {
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="@(i < testimonial.Rating ? "gold" : "#e0e0e0")" class="bi bi-star-fill" viewBox="0 0 16 16">
+                                        <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                                    </svg>
+                                }
+                            </div>
+                            <p class="text-muted mb-4">@testimonial.Text</p>
+                            <div class="d-flex align-items-center">
+                                <img src="@testimonial.Avatar" alt="@testimonial.Name" width="40" height="40" class="rounded-circle me-3" />
+                                <div>
+                                    <h6 class="mb-0">@testimonial.Name</h6>
+                                    <small class="text-muted">@testimonial.Location</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+<!-- Newsletter -->
+<section class="py-5 bg-success text-white">
+    <div class="container">
+        <div class="row justify-content-center text-center">
+            <div class="col-lg-8">
+                <h2 class="display-6 fw-bold mb-3">Join Our Newsletter</h2>
+                <p class="text-white-50 mb-4">
+                    Subscribe to get special offers, free giveaways, and once-in-a-lifetime deals on soccer merchandise
+                </p>
+                <form class="row g-2 justify-content-center">
+                    <div class="col-12 col-sm-8 col-md-6">
+                        <input type="email" class="form-control form-control-lg bg-white bg-opacity-10 border-light text-white" placeholder="Enter your email" aria-label="Email address" />
+                    </div>
+                    <div class="col-12 col-sm-4 col-md-auto">
+                        <button type="submit" class="btn btn-light btn-lg w-100 text-success">Subscribe</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+@code {
+    private List<Category> categories = new List<Category>
+    {
+        new Category { Name = "Jerseys", Image = "/placeholder.svg?height=200&width=300" },
+        new Category { Name = "Footwear", Image = "/placeholder.svg?height=200&width=300" },
+        new Category { Name = "Equipment", Image = "/placeholder.svg?height=200&width=300" },
+        new Category { Name = "Fan Gear", Image = "/placeholder.svg?height=200&width=300" }
+    };
+
+    private List<Product> products = new List<Product>
+    {
+        new Product { 
+            Name = "Official Team Jersey 2023/24", 
+            Category = "Jerseys", 
+            Price = 89.99m, 
+            Rating = 4.8m, 
+            Image = "/placeholder.svg?height=200&width=300", 
+            IsNew = true 
+        },
+        new Product { 
+            Name = "Professional Soccer Cleats", 
+            Category = "Footwear", 
+            Price = 129.99m, 
+            Rating = 4.7m, 
+            Image = "/placeholder.svg?height=200&width=300", 
+            IsNew = false 
+        },
+        new Product { 
+            Name = "Match Ball Replica", 
+            Category = "Equipment", 
+            Price = 34.99m, 
+            Rating = 4.9m, 
+            Image = "/placeholder.svg?height=200&width=300", 
+            IsNew = true 
+        },
+        new Product { 
+            Name = "Team Scarf", 
+            Category = "Fan Gear", 
+            Price = 24.99m, 
+            Rating = 4.6m, 
+            Image = "/placeholder.svg?height=200&width=300", 
+            IsNew = false 
+        }
+    };
+
+    private List<Testimonial> testimonials = new List<Testimonial>
+    {
+        new Testimonial { 
+            Name = "Alex Johnson", 
+            Location = "New York, USA", 
+            Rating = 5, 
+            Text = "The quality of the jersey I purchased is outstanding. Fast shipping and great customer service!", 
+            Avatar = "/placeholder.svg?height=40&width=40" 
+        },
+        new Testimonial { 
+            Name = "Maria Garcia", 
+            Location = "Madrid"
+        },
+        new Testimonial { 
+            Name = "Maria Garcia", 
+            Location = "Madrid, Spain", 
+            Rating = 5, 
+            Text = "I've been buying from Soccer Store for years. Their products are authentic and the prices are reasonable.", 
+            Avatar = "/placeholder.svg?height=40&width=40" 
+        },
+        new Testimonial { 
+            Name = "David Kim", 
+            Location = "Seoul, South Korea", 
+            Rating = 4, 
+            Text = "Great selection of international team merchandise. Would definitely recommend to other soccer fans.", 
+            Avatar = "/placeholder.svg?height=40&width=40" 
+        }
+    };
+
+    public class Category
+    {
+        public string? Name { get; set; }
+        public string? Image { get; set; }
+    }
+
+    public class Product
+    {
+        public string? Name { get; set; }
+        public string? Category { get; set; }
+        public decimal Price { get; set; }
+        public decimal Rating { get; set; }
+        public string? Image { get; set; }
+        public bool IsNew { get; set; }
+    }
+
+    public class Testimonial
+    {
+        public string? Name { get; set; }
+        public string? Location { get; set; }
+        public int Rating { get; set; }
+        public string? Text { get; set; }
+        public string? Avatar { get; set; }
+    }
+}
