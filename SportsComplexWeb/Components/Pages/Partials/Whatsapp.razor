@@ -1,0 +1,14 @@
+﻿<section class="text-center my-5" id="whatsapp">
+    <h2 class="fw-bold mb-3">Fale Conosco pelo WhatsApp</h2>
+    <p class="mb-4">Tire suas dúvidas agora mesmo pelo WhatsApp!</p>
+    <a href="@WhatsappLink"
+       target="_blank"
+       class="btn btn-success btn-lg d-inline-flex align-items-center gap-2">
+        <i class="bi bi-whatsapp" style="font-size: 1.5rem;"></i> Enviar Mensagem
+    </a>
+</section>
+
+@code {
+    const string Message = "Olá!%20Gostaria%20de%20mais%20informações%20sobre%20o%20Complexo%20Esportivo!";
+    const string WhatsappLink = "https://api.whatsapp.com/send?phone=5511999999999&text=" + Message;
+}

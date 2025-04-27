@@ -1,0 +1,73 @@
+﻿<section class="py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="display-6 fw-bold">What Our Customers Say</h2>
+            <p class="text-muted mx-auto" style="max-width: 700px;">
+                Don't just take our word for it - hear from some of our satisfied customers
+            </p>
+        </div>
+        <div class="row g-4">
+            @foreach (var testimonial in testimonials)
+            {
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="card-body p-4">
+                            <div class="mb-3">
+                                @for (int i = 0; i < 5; i++)
+                                {
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="@(i < testimonial.Rating ? "gold" : "#e0e0e0")" class="bi bi-star-fill" viewBox="0 0 16 16">
+                                        <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                                    </svg>
+                                }
+                            </div>
+                            <p class="text-muted mb-4">@testimonial.Text</p>
+                            <div class="d-flex align-items-center">
+                                <img src="@testimonial.Avatar" alt="@testimonial.Name" width="40" height="40" class="rounded-circle me-3" />
+                                <div>
+                                    <h6 class="mb-0">@testimonial.Name</h6>
+                                    <small class="text-muted">@testimonial.Location</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+@code {
+    private List<Testimonial> testimonials = new List<Testimonial>
+    {
+        new Testimonial {
+            Name = "Alex Johnson",
+            Location = "New York, USA",
+            Rating = 5,
+            Text = "The quality of the jersey I purchased is outstanding. Fast shipping and great customer service!",
+            Avatar = "https://img.freepik.com/free-photo/handsome-man-smiling-happy-face-portrait-close-up_53876-145493.jpg?semt=ais_hybrid&w=740"
+        },
+        new Testimonial {
+            Name = "Maria Garcia",
+            Location = "Madrid, Spain",
+            Rating = 5,
+            Text = "I've been buying from Soccer Store for years. Their products are authentic and the prices are reasonable.",
+            Avatar = "https://img.freepik.com/premium-photo/close-up-smiling-confident-beautiful-brunette-girl-glasses-looking-happy_1258-19160.jpg"
+        },
+        new Testimonial {
+            Name = "David Kim",
+            Location = "Seoul, South Korea",
+            Rating = 4,
+            Text = "Great selection of international team merchandise. Would definitely recommend to other soccer fans.",
+            Avatar = "https://img.freepik.com/free-photo/smiling-businessman-face-portrait-wearing-suit_53876-148135.jpg"
+        }
+    };
+
+    public class Testimonial
+    {
+        public string? Name { get; set; }
+        public string? Location { get; set; }
+        public int Rating { get; set; }
+        public string? Text { get; set; }
+        public string? Avatar { get; set; }
+    }
+}

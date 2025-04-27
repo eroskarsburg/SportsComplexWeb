@@ -1,0 +1,92 @@
+﻿<section class="py-5 bg-light" id="products">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="display-6 fw-bold">Featured Products</h2>
+            <p class="text-muted mx-auto" style="max-width: 700px;">
+                Check out our most popular soccer merchandise and fan favorites
+            </p>
+        </div>
+        <div class="row g-4">
+            @foreach (var product in products)
+            {
+                <div class="col-sm-6 col-lg-3">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="position-relative">
+                            <img src="@product.Image" alt="@product.Name" class="card-img-top" style="height: 200px; object-fit: cover;" />
+                            @if (product.IsNew)
+                            {
+                                <span class="position-absolute top-0 end-0 badge bg-success m-2">New</span>
+                            }
+                        </div>
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <small class="text-muted">@product.Category</small>
+                                <div class="d-flex align-items-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="gold" class="bi bi-star-fill me-1" viewBox="0 0 16 16">
+                                        <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                                    </svg>
+                                    <small class="fw-bold">@product.Rating</small>
+                                </div>
+                            </div>
+                            <h5 class="card-title">@product.Name</h5>
+                            <div class="d-flex justify-content-between align-items-center mt-3">
+                                <span class="fw-bold">$@product.Price.ToString("F2")</span>
+                                <button class="btn btn-sm btn-outline-success">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="text-center mt-5">
+            <a href="#" class="btn btn-success btn-lg">View All Products</a>
+        </div>
+    </div>
+</section>
+
+@code {
+    private List<Product> products = new List<Product>
+    {
+        new Product {
+            Name = "Official Team Jersey 2023/24",
+            Category = "Jerseys",
+            Price = 89.99m,
+            Rating = 4.8m,
+            Image = "https://www.davidgandywellwear.com/cdn/shop/products/Ultimate-Loopback-Hoodie-Black.jpg?v=1677258480&width=1946",
+            IsNew = true
+        },
+        new Product {
+            Name = "Professional Soccer Cleats",
+            Category = "Footwear",
+            Price = 129.99m,
+            Rating = 4.7m,
+            Image = "https://us.strauss.com/cdn/shop/files/Work_Pants_e.s.motion_ten_USA_oxidblack_neu.png?v=1718722741",
+            IsNew = false
+        },
+        new Product {
+            Name = "Match Ball Replica",
+            Category = "Equipment",
+            Price = 34.99m,
+            Rating = 4.9m,
+            Image = "https://www.madebycooper.co.uk/images/jcogs_img/cache/parts-of-a-baseball-cap-guide_-_28de80_-_d25ab1746a6263a315533c7d1628732318646ac5.jpg",
+            IsNew = true
+        },
+        new Product {
+            Name = "Team Scarf",
+            Category = "Fan Gear",
+            Price = 24.99m,
+            Rating = 4.6m,
+            Image = "https://thumblr.uniid.it/product/352916/c2b901eae871.jpg?width=3840&format=webp&q=75",
+            IsNew = false
+        }
+    };
+    public class Product
+    {
+        public string? Name { get; set; }
+        public string? Category { get; set; }
+        public decimal Price { get; set; }
+        public decimal Rating { get; set; }
+        public string? Image { get; set; }
+        public bool IsNew { get; set; }
+    }
+}

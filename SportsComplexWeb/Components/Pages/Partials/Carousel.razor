@@ -1,0 +1,74 @@
+﻿<section class="py-0" id="carousel">
+    <div id="soccerCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+            @for (int i = 0; i < carouselItems.Count; i++)
+            {
+                <button type="button" data-bs-target="#soccerCarousel" data-bs-slide-to="@i" class="@(i == 0 ? "active" : "")" aria-current="@(i == 0 ? "true" : "false")" aria-label="Slide @(i + 1)"></button>
+            }
+        </div>
+        <div class="carousel-inner">
+            @foreach (var item in carouselItems.Select((value, index) => new { value, index }))
+            {
+                <div class="carousel-item @(item.index == 0 ? "active" : "")">
+                    <img src="@item.value.ImageUrl" class="d-block w-100" alt="@item.value.AltText" style="height: 600px; object-fit: cover;">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h3 class="fw-bold">@item.value.Title</h3>
+                        <p>@item.value.Description</p>
+                        <a href="@item.value.ButtonLink" class="btn btn-success mb-3">@item.value.ButtonText</a>
+                    </div>
+                </div>
+            }
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#soccerCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#soccerCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+</section>
+
+@code {
+    private List<CarouselItem> carouselItems = new List<CarouselItem>
+    {
+        new CarouselItem
+        {
+            ImageUrl = "https://images.pexels.com/photos/2277980/pexels-photo-2277980.jpeg?cs=srgb&dl=pexels-king-siberia-1123639-2277980.jpg&fm=jpg",
+            AltText = "Espaço Esportivo",
+            Title = "Espaço Esportivo",
+            Description = "Um vasto espaço com diversos campos para práticas esportivas!",
+            ButtonText = "Saiba mais",
+            ButtonLink = "#"
+        },
+        new CarouselItem
+        {
+            ImageUrl = "https://www.wallart.com/media/catalog/product/cache/5b18b93ddbe5d6592c6b175f41d24454/b/e/behang-met-een-voetbalstadion_6.jpg",
+            AltText = "Eventos",
+            Title = "Eventos",
+            Description = "Abrange eventos semanais no espaço de lazer em frente aos gramados.",
+            ButtonText = "Saiba mais",
+            ButtonLink = "#"
+        },
+        new CarouselItem
+        {
+            ImageUrl = "https://images.unsplash.com/photo-1540379708242-14a809bef941?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8c29jY2VyJTIwc3RhZGl1bXxlbnwwfHwwfHx8MA%3D%3D",
+            AltText = "Infraestrutura",
+            Title = "Infraestrutura",
+            Description = "Infraestrutura moderna com diversas tecnologias para melhor atender os clientes.",
+            ButtonText = "Saiba mais",
+            ButtonLink = "#"
+        }
+    };
+
+    public class CarouselItem
+    {
+        public string? ImageUrl { get; set; }
+        public string? AltText { get; set; }
+        public string? Title { get; set; }
+        public string? Description { get; set; }
+        public string? ButtonText { get; set; }
+        public string? ButtonLink { get; set; }
+    }
+}
